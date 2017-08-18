@@ -68,12 +68,6 @@ public class MainActivity extends BaseActivity implements CompoundButton.OnCheck
         }
     }
 
-    private void unbindService() {
-        if(null != serviceConnection) {
-            unbindService(serviceConnection);
-            serviceConnection = null;
-        }
-    }
 
     @Override
     protected void onDestroy() {
@@ -103,6 +97,13 @@ public class MainActivity extends BaseActivity implements CompoundButton.OnCheck
     protected void onStop() {
         unbindService();
         super.onStop();
+    }
+
+    private void unbindService() {
+        if(null != serviceConnection) {
+            unbindService(serviceConnection);
+            serviceConnection = null;
+        }
     }
 
     @Override
