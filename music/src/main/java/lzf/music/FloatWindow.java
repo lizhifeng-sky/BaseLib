@@ -65,14 +65,15 @@ public class FloatWindow {
     /**
      * 设置开启状态的布局视图
      * */
-    public void setPlayerView(View PlayerView) {
-        if(PlayerView != null) {
+    public void setPlayerView(View playerView) {
+        if(playerView != null) {
             BackgroundView backgroundView = new BackgroundView(getContext());
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-            PlayerView.setOnTouchListener(new TouchIntercept());
-            PlayerView.setLayoutParams(layoutParams);
-            backgroundView.addView(PlayerView);
+            playerView.setOnTouchListener(new TouchIntercept());
+            playerView.setLayoutParams(layoutParams);
+            backgroundView.removeAllViews();//lzf
+            backgroundView.addView(playerView);
             this.mPlayerView = backgroundView;
         }
     }
@@ -381,9 +382,27 @@ public class FloatWindow {
 
         @Override
         public boolean onTouch(View view, MotionEvent event) {
+//            switch (event.getAction()) {
+//                case MotionEvent.ACTION_UP:
+//                    lastTouchTimeMillis = System.currentTimeMillis();
+//                    break;
+//            }
+//            return true;
             switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                        down(event);
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                        move(event);
+                    break;
                 case MotionEvent.ACTION_UP:
-                    lastTouchTimeMillis = System.currentTimeMillis();
+                        up(event);
+                    break;
+                case MotionEvent.ACTION_OUTSIDE:
+//                        turnMini();
+//                        return true;
+                    break;
+                default:
                     break;
             }
             return true;

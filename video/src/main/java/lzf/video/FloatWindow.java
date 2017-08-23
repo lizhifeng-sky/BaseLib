@@ -382,12 +382,30 @@ public class FloatWindow {
 
         @Override
         public boolean onTouch(View view, MotionEvent event) {
+//            switch (event.getAction()) {
+//                case MotionEvent.ACTION_UP:
+//                    lastTouchTimeMillis = System.currentTimeMillis();
+//                    break;
+//            }
+//            return true;
             switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                        down(event);
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                        move(event);
+                    break;
                 case MotionEvent.ACTION_UP:
-                    lastTouchTimeMillis = System.currentTimeMillis();
+                        up(event);
+                    break;
+                case MotionEvent.ACTION_OUTSIDE:
+//                        turnMini();
+//                        return true;
+                    break;
+                default:
                     break;
             }
-            return true;
+            return false;
         }
     }
 
@@ -397,26 +415,26 @@ public class FloatWindow {
         public boolean onTouch(View view, MotionEvent event) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    if(!isOpen) {
+//                    if(!isOpen) {
                         down(event);
-                    }
+//                    }
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    if(!isOpen) {
+//                    if(!isOpen) {
                         move(event);
-                    }
+//                    }
                     break;
                 case MotionEvent.ACTION_UP:
-                    if(!isOpen) {
+//                    if(!isOpen) {
                         up(event);
-                    }
+//                    }
                     break;
                 case MotionEvent.ACTION_OUTSIDE:
-                    if(isOpen) {
-                        turnMini();
+//                    if(isOpen) {
+//                        turnMini();
                         return true;
-                    }
-                    break;
+//                    }
+//                    break;
                 default:
                     break;
             }

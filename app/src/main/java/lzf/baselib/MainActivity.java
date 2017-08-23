@@ -12,7 +12,7 @@ import java.util.List;
 
 import lzf.common.network.BaseView;
 import lzf.common.network.CustomSubscriber;
-import lzf.common.network.SchedulesTransformer;
+import lzf.common.network.ScheduleTransformer;
 import lzf.common.network.bean.GuideBean;
 
 public class MainActivity extends AppCompatActivity implements BaseView {
@@ -27,9 +27,15 @@ public class MainActivity extends AppCompatActivity implements BaseView {
     }
 
     public void doHttp(View view) {
-        playSound();
+        Test test=Test.create();
+        test.addObservable(apiService.getStartView(2)).getData(new CustomSubscriber<List<GuideBean>>() {
+            @Override
+            public void onSuccess(List<GuideBean> guideBeen) {
+                Log.e("lzf", guideBeen.toString());
+            }
+        });
         apiService.getStartView(2)
-                .compose(new SchedulesTransformer<List<GuideBean>>())
+                .compose(new ScheduleTransformer<List<GuideBean>>())
                 .subscribe(new CustomSubscriber<List<GuideBean>>() {
                     @Override
                     public void onSuccess(List<GuideBean> guideBeen) {

@@ -2,6 +2,8 @@ package lzf.music.activity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ComponentCallbacks;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
@@ -21,6 +23,17 @@ public class BaseActivity extends Activity {
             setTranslucentStatus();
             //还有设置View的高度，因为每个型号的手机状态栏高度都不相同
         }
+        this.registerComponentCallbacks(new ComponentCallbacks() {
+            @Override
+            public void onConfigurationChanged(Configuration newConfig) {
+
+            }
+
+            @Override
+            public void onLowMemory() {
+
+            }
+        });
     }
 
     @TargetApi(19)

@@ -2,23 +2,16 @@ package lzf.video;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ActivityOptions;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.pili.pldroid.player.AVOptions;
-import com.pili.pldroid.player.PLMediaPlayer;
 import com.pili.pldroid.player.widget.PLVideoTextureView;
 
 public class MainActivity extends Activity {
@@ -118,7 +111,7 @@ public class MainActivity extends Activity {
         TextView floatTextView = new TextView(MainActivity.this);
         floatTextView.setText("video");
         floatTextView.setTextColor(Color.RED);
-        floatTextView.setTextSize(40);
+        floatTextView.setTextSize(20);
         floatWindow.setFloatView(floatTextView);
     }
 }
