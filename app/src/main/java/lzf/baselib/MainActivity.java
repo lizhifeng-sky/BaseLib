@@ -13,7 +13,9 @@ import java.util.List;
 import lzf.common.network.BaseView;
 import lzf.common.network.CustomSubscriber;
 import lzf.common.network.ScheduleTransformer;
+import lzf.common.network.bean.BaseRequestMode;
 import lzf.common.network.bean.GuideBean;
+import rx.functions.Func1;
 
 public class MainActivity extends AppCompatActivity implements BaseView {
     private SoundPool soundPool;
@@ -27,21 +29,25 @@ public class MainActivity extends AppCompatActivity implements BaseView {
     }
 
     public void doHttp(View view) {
-        Test test=Test.create();
-        test.addObservable(apiService.getStartView(2)).getData(new CustomSubscriber<List<GuideBean>>() {
+        Test.getData(apiService.getStartView(2), new CustomSubscriber<List<GuideBean>>() {
             @Override
             public void onSuccess(List<GuideBean> guideBeen) {
                 Log.e("lzf", guideBeen.toString());
             }
+        }).map(new Func1<List<GuideBean>, Object>() {
+            @Override
+            public Object call(List<GuideBean> guideBeen) {
+                return null;
+            }
         });
-        apiService.getStartView(2)
-                .compose(new ScheduleTransformer<List<GuideBean>>())
-                .subscribe(new CustomSubscriber<List<GuideBean>>() {
-                    @Override
-                    public void onSuccess(List<GuideBean> guideBeen) {
-                        Log.e("lzf", guideBeen.toString());
-                    }
-                });
+//        apiService.getStartView(2)
+//                .compose(new ScheduleTransformer<List<GuideBean>>())
+//                .subscribe(new CustomSubscriber<List<GuideBean>>() {
+//                    @Override
+//                    public void onSuccess(List<GuideBean> guideBeen) {
+//                        Log.e("lzf", guideBeen.toString());
+//                    }
+//                });
     }
 
     private void playSound() {
